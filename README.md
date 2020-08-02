@@ -1,3 +1,3 @@
 # Updates
 ## 2020
-* （baidu）[www.baidu.com]
+* (baidu)[www.baidu.com]

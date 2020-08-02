@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>用户登录</title>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weui.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/weuix.css"/>
+    <link rel="stylesheet" href="https://students.demoo.com.cn/htmlstatic/plug/weuix/css/common.css"/>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery2.1.4/jquery.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.validate.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/jquery.form.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.min.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/zepto.weui.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/php.js"></script>
+    <script src="https://students.demoo.com.cn/htmlstatic/plug/weuix/js/picker.city.js"></script>
+</head>
+<body>
+    <div id="popout"></div>
+    <div id="mask"></div>
+    <div id="navigation"></div>
+    <div id="content">    <div>
+            <img style="width: 100%" src="https://hzdemoo.oss-cn-hangzhou.aliyuncs.com/zjgsu/qjbg.jpg" alt="">
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+    
+            <div style="padding-top: 50px">
+                <div class="weui-cells__title"></div>
+                <div class="f-green f20" style="text-align: center">学生身份认证</div>
+                <div class="weui-cells weui-cells_form" style="margin-top: 30px">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="name" type="text" class="weui-input"
+                                                                            placeholder="Please enter your Name"
+                                                                            required name="name"/>
+                        </div>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="password" name="password" type="password"
+                                                                            class="weui-input"
+                                                                            placeholder="Please enter your password"
+                                                                            required/></div>
+                    </div>
+    
+                    <div class="weui-cell weui-cell_vcode">
+                        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+                        <div class="weui-cell__bd weui-cell_primary"><input id="captcha" name="captcha" type="text"
+                                                                            class="weui-input" placeholder="请不要填写验证码" required></div>
+                        <div class="weui-cell__ft">
+                            <img class="weui-vcode-img"
+                                 src="https://students.demoo.com.cn/captcha/default?unA9aigj" id="captchasrc"
+                                 onclick="this.src='https://students.demoo.com.cn/captcha/default?tVdozgDS'+Math.random()"
+                                 alt="验证码">
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="weui-cells__tips">
+                初始密码为身份证后6位
+            </div>
+            <div class="weui-btn-area">
+                <button  class="weui-btn weui-btn_primary" id="btn">出校</button>
+
+                <button  class="weui-btn weui-btn_primary" id="btn_in">入校</button>
+            </div>
+            <script>
+                $(function(){
+                    alert("项目已迁移，可以复制网址（http://www.studentapply.icu）到微信登陆");
+                    $("#btn").on("click",function(){
+                       jump1();
+                    });
+                    $("#btn_in").on("click",function(){
+                       jump2();
+                    });
+                });
+        
+                function jump1(){
+                    var name=document.getElementById("name").value;
+                    var passwd=document.getElementById("password").value;
+                    if(window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else{
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","connect.php?passwd="+passwd+"&name="+name,true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange=function()
+                    {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                        {
+                        // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+                        if(xmlhttp.responseText == 1){
+                            url = "out.html?name="+encodeURI(name)+"&password="+passwd;//此处拼接内容
+                            window.location.href = url;
+                            }
+                        else{
+                            alert("账号或密码错误");
+                            }
+                        }
+                    }
+                    // //url = "./comein.html"
+                    // url = "out.html?name="+encodeURI(name)+"&password="+password;//此处拼接内容
+                    // window.location.href = url;
+                }
+                function jump2(){
+                    var name=document.getElementById("name").value;
+                    var password=document.getElementById("password").value;
+                    var name=document.getElementById("name").value;
+                    var passwd=document.getElementById("password").value;
+                    if(window.XMLHttpRequest){
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else{
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","connect.php?passwd="+passwd+"&name="+name,true);
+                    xmlhttp.send();
+                    xmlhttp.onreadystatechange=function()
+                    {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                        {
+                        // document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+                        if(xmlhttp.responseText == 1){
+                            url = "comein.html?name="+encodeURI(name)+"&password="+password;//此处拼接内容
+                            window.location.href = url;
+                            }
+                        else{
+                            alert("账号或密码错误");
+                            }
+                        }
+                    }
+                    // //url = "./comein.html"
+                    // url = "comein.html?name="+encodeURI(name)+"&password="+password;//此处拼接内容
+                    // window.location.href = url;
+                }
+            </script>
+        </form>
+        <div class="weui-footer" style="margin-top: 30px">
+            <p class="weui-footer__text">浙江工商大学学生处<br>
+                Copyright 2018-2020 <br></p>
+        </div>
+    
+</body>
+</html>
